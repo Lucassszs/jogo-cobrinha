@@ -13,6 +13,10 @@ y = altura/2
 x_azul = randint(40, 600)
 y_azul = randint(50, 430)
 
+fonte = pygame.font.SysFont('arial', 40, True, True)
+pontos = 0
+
+
 tela = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption('Jogo')
 relogio = pygame.time.Clock()
@@ -20,6 +24,8 @@ relogio = pygame.time.Clock()
 while True:
     relogio.tick(30)
     tela.fill((0,0,0))
+    mensagem = f'pontos: {pontos}'
+    textoformatado = fonte.render(mensagem, True, (255, 255, 255))
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
@@ -49,8 +55,7 @@ while True:
     
     if ret_vermelho.colliderect(ret_azul):
         pontos = pontos + 1
-        print ('pontos')
         x_azul = randint(40, 600)
         y_azul = randint(50, 430)
-    
+    tela.blit(textoformatado, (450, 40))
     pygame.display.update()

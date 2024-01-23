@@ -5,6 +5,14 @@ from random import randint
 
 pygame.init()
 
+pygame.mixer.music.set_volume(0.4)
+musica_de_fundo = pygame.mixer.music.load('02. Crazy Dave (Intro Theme).mp3')
+pygame.mixer.music.play(-1)
+
+barulho_colisao = pygame.mixer.Sound('sound-effect-file-ring-mp3.mp3')
+barulho_colisao.set_volume(0.1)
+
+
 largura = 640
 altura = 480
 x = largura/2 
@@ -24,6 +32,7 @@ relogio = pygame.time.Clock()
 while True:
     relogio.tick(30)
     tela.fill((0,0,0))
+    
     mensagem = f'pontos: {pontos}'
     textoformatado = fonte.render(mensagem, True, (255, 255, 255))
     for event in pygame.event.get():
@@ -57,5 +66,6 @@ while True:
         pontos = pontos + 1
         x_azul = randint(40, 600)
         y_azul = randint(50, 430)
-    tela.blit(textoformatado, (450, 40))
+        barulho_colisao.play()
+    tela.blit(textoformatado, (400, 40))
     pygame.display.update()
